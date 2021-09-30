@@ -20,7 +20,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var orderFilterButton: FilterButton!
     
     // MARK: ASSERT PARAM
-    private let filterAction = PublishRelay<Filter>()
+    private let filterAction = PublishRelay<Bool>() // true 이면, 리프레싱 또는 초기로드
     private let viewModel = ViewModel()
     private var bag = DisposeBag()
     
@@ -32,7 +32,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         bindViewModel()
         
         // 초기 세팅으로 로드
-        filterAction.accept(viewModel.filter)
+        filterAction.accept(true)
     }
     
     // MARK: Setup View
@@ -50,76 +50,21 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         
         // 새로고침 버튼
         refreshButton.rx.tap
-            .map{[weak self] _ in
-                FeedbackGenerator().impact()
-                self?.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
-                self?.viewModel.filter.startIndex = 0
-                return (self?.viewModel.filter)!
+            .map{ FeedbackGenerator().impact()
+                return true
             }
-            .bind(to: filterAction)
-            .disposed(by: bag)
-        
-        // RoomType 필터 버튼
-        var roomTypeFilterObs: [Observable<ControlEvent<Void>.Element>] = []
-        roomTypeFilterButtons.forEach { button in
-            let roomTypeFilterOb = button.rx.tap
-                .do(onNext: { _ in
-                    if button.on {
-                        if self.roomTypeFilterButtons.filter({$0.on}).count == 1 { // 현재 한개만 선택된 경우
-                            return
-                        }
-                        self.viewModel.filter.removeRoomType(type: button.tag)
-                    } else {
-                        self.viewModel.filter.addRoomType(type: button.tag)
-                    }
-                    button.on.toggle()
-                }).asObservable().share()
-            
-            roomTypeFilterObs.append(roomTypeFilterOb)
-        }
-        
-        // SellingType 필터 버튼
-        var sellingTypeFilterObs: [Observable<ControlEvent<Void>.Element>] = []
-        sellingTypeFilterButtons.forEach { button in
-            let sellingTypeFilterOb = button.rx.tap
-                .do(onNext: { _ in
-                    if button.on {
-                        if self.sellingTypeFilterButtons.filter({$0.on}).count == 1 { // 현재 한개만 선택된 경우
-                            return
-                        }
-                        self.viewModel.filter.removeSellingType(type: button.tag)
-                    } else {
-                        self.viewModel.filter.addSellingType(type: button.tag)
-                    }
-                    button.on.toggle()
-                }).asObservable().share()
-            
-            sellingTypeFilterObs.append(sellingTypeFilterOb)
-        }
-        
-        // 정렬순서 필터 버튼
-        let orderFilterOb = orderFilterButton.rx.tap
-            .do(onNext: {_ in
-                self.orderFilterButton.on.toggle()
-                self.viewModel.filter.orderAsc = self.orderFilterButton.on
-            }).asObservable().share()
-        
-        
-        // 필터버튼 바인딩
-        Observable.merge(roomTypeFilterObs + sellingTypeFilterObs + [orderFilterOb])
-            .do(onNext: {_ in
-                self.viewModel.filter.startIndex = 0
-                FeedbackGenerator().impact()
-            })
-            .map{ _ in self.viewModel.filter }
             .bind(to: filterAction)
             .disposed(by: bag)
     }
     
     // MARK: Bind View Model
     private func bindViewModel() {
+        
         let inputOb = ViewModel.Input(
-            filterAction: filterAction.asObservable()
+            filterAction: filterAction.asObservable(),
+            roomTypeFilterButtons: roomTypeFilterButtons,
+            sellingTypeFilterButtons: sellingTypeFilterButtons,
+            orderFilterButton: orderFilterButton
         )
         
         let output = viewModel.transform(inputOb: inputOb)
@@ -155,6 +100,9 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                 if let loadCnt = $0.first?.items.filter({$0.desc != "average"}).count {
                     self?.title = "방 \(loadCnt)개 로드 됨"
                 }
+                if self?.viewModel.filter.startIndex == 0 {
+                    self?.tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: false)
+                }
             })
             .drive(tableView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
@@ -167,9 +115,8 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         let position = scrollView.contentOffset.y
         if position > (tableView.contentSize.height - 100 - scrollView.frame.size.height), !viewModel.isLoading {
             viewModel.isLoading = true
-            DispatchQueue.main.asyncAfter(deadline: .now()+0.5, execute: {
-                self.viewModel.filter.startIndex += self.viewModel.LIMIT_CNT
-                self.filterAction.accept(self.viewModel.filter)
+            DispatchQueue.main.asyncAfter(deadline: .now()+0.25, execute: {
+                self.filterAction.accept(false)
             })
         }
     }

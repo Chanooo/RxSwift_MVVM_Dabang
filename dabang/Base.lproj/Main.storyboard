@@ -20,22 +20,27 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="167"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nzH-ag-Bsh" customClass="FilterButton" customModule="dabang" customModuleProvider="target">
-                                        <rect key="frame" x="63" y="47" width="46" height="30"/>
+                                        <rect key="frame" x="71" y="47" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="원룸"/>
+                                    </button>
+                                    <button opaque="NO" tag="1" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8I5-cU-O5E" customClass="FilterButton" customModule="dabang" customModuleProvider="target">
+                                        <rect key="frame" x="139" y="47" width="52" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="투쓰리룸"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vip-DO-Sbc" customClass="FilterButton" customModule="dabang" customModuleProvider="target">
-                                        <rect key="frame" x="51" y="129" width="46" height="30"/>
+                                        <rect key="frame" x="59" y="129" width="30" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="월세"/>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CjB-TH-PsK" customClass="FilterButton" customModule="dabang" customModuleProvider="target">
-                                        <rect key="frame" x="317" y="68" width="46" height="30"/>
+                                        <rect key="frame" x="314" y="68" width="52" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="Button"/>
+                                        <state key="normal" title="오름차순"/>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <color key="backgroundColor" systemColor="systemTealColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="167" id="RHT-hP-uAX"/>
                                 </constraints>
@@ -58,7 +63,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vIT-Gq-7rv">
-                                                    <rect key="frame" x="10" y="10" width="42" height="21"/>
+                                                    <rect key="frame" x="10" y="10" width="42" height="93"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="93" id="VDL-7V-H37"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -66,6 +74,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="vIT-Gq-7rv" firstAttribute="leading" secondItem="zHU-hv-ItG" secondAttribute="leading" constant="10" id="ZgU-9Y-DkB"/>
+                                                <constraint firstAttribute="bottom" secondItem="vIT-Gq-7rv" secondAttribute="bottom" constant="10" id="c9c-eN-eOE"/>
                                                 <constraint firstItem="vIT-Gq-7rv" firstAttribute="top" secondItem="zHU-hv-ItG" secondAttribute="top" constant="10" id="y0X-AN-BeV"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -74,14 +83,14 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomCellReverse" rowHeight="113" id="aQv-36-aZ4" userLabel="RoomCell" customClass="RoomCell" customModule="dabang" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="24.5" width="414" height="113"/>
+                                        <rect key="frame" x="0.0" y="137.5" width="414" height="113"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="aQv-36-aZ4" id="DsD-au-PZc">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="113"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZKy-CX-G7z">
-                                                    <rect key="frame" x="10" y="10" width="42" height="21"/>
+                                                    <rect key="frame" x="342" y="10" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -97,7 +106,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AverageCell" rowHeight="80" id="Vot-Gt-Kaz" userLabel="AverageCell" customClass="AverageCell" customModule="dabang" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="137.5" width="414" height="80"/>
+                                        <rect key="frame" x="0.0" y="250.5" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Vot-Gt-Kaz" id="28O-Oi-A1G">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
@@ -180,6 +189,7 @@
                         <outlet property="tableView" destination="oyw-k8-mLc" id="omU-bM-gYe"/>
                         <outletCollection property="roomTypeFilterButtons" destination="nzH-ag-Bsh" collectionClass="NSMutableArray" id="DJr-UP-TlA"/>
                         <outletCollection property="sellingTypeFilterButtons" destination="vip-DO-Sbc" collectionClass="NSMutableArray" id="hpa-T4-apV"/>
+                        <outletCollection property="roomTypeFilterButtons" destination="8I5-cU-O5E" collectionClass="NSMutableArray" id="udc-Vq-3Hd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -204,8 +214,14 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="CjB-TH-PsK">
+            <size key="intrinsicContentSize" width="52" height="30"/>
+        </designable>
         <designable name="nzH-ag-Bsh">
-            <size key="intrinsicContentSize" width="46" height="30"/>
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="vip-DO-Sbc">
+            <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
     </designables>
     <resources>
@@ -219,8 +235,8 @@
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <systemColor name="systemTealColor">
+            <color red="0.35294117647058826" green="0.78431372549019607" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

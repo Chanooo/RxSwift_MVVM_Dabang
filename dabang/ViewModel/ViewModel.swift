@@ -25,7 +25,10 @@ class ViewModel {
     var isLoading: Bool = true
     
     struct Input {
-        let filterAction: Observable<Filter>
+        let filterAction: Observable<Bool>
+        let roomTypeFilterButtons: [FilterButton]!
+        let sellingTypeFilterButtons: [FilterButton]!
+        let orderFilterButton: FilterButton!
     }
     
     private var models: [RoomModel] = []
@@ -38,9 +41,74 @@ class ViewModel {
     
     func transform(inputOb: Input) -> Output {
         
+        // fetch
         inputOb.filterAction
+            .map{[unowned self] isRefresh in
+                self.filter.startIndex = isRefresh ? 0
+                    : self.filter.startIndex + self.LIMIT_CNT
+                
+                return self.filter
+            }
             .bind(onNext: filterRooms)
             .disposed(by: bag)
+        
+        
+        // RoomType 필터 버튼
+        var roomTypeFilterObs: [Observable<ControlEvent<Void>.Element>] = []
+        inputOb.roomTypeFilterButtons.forEach { button in
+            let roomTypeFilterOb = button.rx.tap
+                .do(onNext: { _ in
+                    if button.on {
+                        if inputOb.roomTypeFilterButtons.filter({$0.on}).count == 1 { // 현재 한개만 선택된 경우
+                            return
+                        }
+                        self.filter.removeRoomType(type: button.tag)
+                    } else {
+                        self.filter.addRoomType(type: button.tag)
+                    }
+                    button.on.toggle()
+                }).asObservable().share()
+            
+            roomTypeFilterObs.append(roomTypeFilterOb)
+        }
+        
+        // SellingType 필터 버튼
+        var sellingTypeFilterObs: [Observable<ControlEvent<Void>.Element>] = []
+        inputOb.sellingTypeFilterButtons.forEach { button in
+            let sellingTypeFilterOb = button.rx.tap
+                .do(onNext: { _ in
+                    if button.on {
+                        if inputOb.sellingTypeFilterButtons.filter({$0.on}).count == 1 { // 현재 한개만 선택된 경우
+                            return
+                        }
+                        self.filter.removeSellingType(type: button.tag)
+                    } else {
+                        self.filter.addSellingType(type: button.tag)
+                    }
+                    button.on.toggle()
+                }).asObservable().share()
+            
+            sellingTypeFilterObs.append(sellingTypeFilterOb)
+        }
+        
+        // 정렬순서 필터 버튼
+        let orderFilterOb = inputOb.orderFilterButton.rx.tap
+            .do(onNext: {_ in
+                inputOb.orderFilterButton.on.toggle()
+                self.filter.orderAsc = inputOb.orderFilterButton.on
+            }).asObservable().share()
+        
+        
+        // 필터버튼 바인딩
+        Observable.merge(roomTypeFilterObs + sellingTypeFilterObs + [orderFilterOb])
+            .do(onNext: {_ in
+                FeedbackGenerator().impact()
+                self.filter.startIndex = 0
+            })
+            .map{ _ in self.filter }
+            .bind(onNext: filterRooms)
+            .disposed(by: bag)
+        
         
         let outputOb = Output(
             modelsDriver: modelsSectionRelay.asDriver(onErrorJustReturn: nil)
@@ -52,6 +120,7 @@ class ViewModel {
     
     // MARK: Busniss Logic
     private func filterRooms(filter: Filter) {
+        
         if let model = loadData(filter: filter) {
             
             // 마지막 로드인 경우
@@ -88,7 +157,6 @@ class ViewModel {
            let data = json.data(using: .utf8),
            let model = try? JSONDecoder().decode(Model.self, from: data)
         {
-            print(filter)
             avgModel = model.average.first!
             return model.rooms.filter({
                 filter.roomTypes.contains(RoomType(rawValue: $0.roomType)!) &&
