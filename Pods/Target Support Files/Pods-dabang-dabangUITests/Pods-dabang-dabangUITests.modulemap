@@ -1,0 +1,6 @@
+framework module Pods_dabang_dabangUITests {
+  umbrella header "Pods-dabang-dabangUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
