@@ -26,7 +26,7 @@ extension UIImageView {
                 let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
                 let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
                 let data = data, error == nil,
-                let image = UIImage(data: data)?.resizedImage(targetSize: CGSize(width: 80, height: 80))
+                let image = UIImage(data: data)?.resizedImage(targetSize: CGSize(width: 126, height: 84))
                 else { return }
             
             DispatchQueue.main.async() { [weak self] in

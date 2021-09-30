@@ -40,6 +40,11 @@ class ViewController: UIViewController, UIScrollViewDelegate {
         roomTypeFilterButtons.forEach{$0.on = true}
         sellingTypeFilterButtons.forEach{$0.on = true}
         orderFilterButton.on = true
+        
+        roomTypeFilterButtons.forEach{$0.setWidth()}
+        sellingTypeFilterButtons.forEach{$0.setWidth()}
+        orderFilterButton.setWidth()
+        
     }
     
     // MARK: Bind View
@@ -74,6 +79,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     let cell = tableView.dequeueReusableCell(withIdentifier: "AverageCell", for: indexPath) as! AverageCell
                     if let avg = self?.viewModel.avgModel {
                         // avg UI
+                        cell.setUI(data: avg)
                     }
                     return cell
                 } else {
@@ -83,11 +89,7 @@ class ViewController: UIViewController, UIScrollViewDelegate {
                     } else {
                         cell = tableView.dequeueReusableCell(withIdentifier: "RoomCellReverse", for: indexPath) as! RoomCell
                     }
-                    
-                    cell.titleLabel.text = item.priceTitle
-                    item.desc
-                    item.imgUrl
-//                self.setTableViewUI(row: indexPath.row, model: item, cell: cell)
+                    cell.setUI(data: item)
                     return cell
                 }
             }

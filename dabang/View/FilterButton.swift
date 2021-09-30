@@ -7,13 +7,10 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 @IBDesignable
 class FilterButton: UIButton {
-    
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-    }
     
     private var _on: Bool = true
     var on: Bool {
@@ -22,12 +19,26 @@ class FilterButton: UIButton {
         }
         set {
             _on = newValue
-            layer.masksToBounds = true
-            backgroundColor = newValue ? .blue : .white
-            layer.cornerRadius = 8
-            titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-            setTitleColor(.black, for: .normal)
+            setUI(on: newValue)
         }
+    }
+    
+    func setWidth() {
+        if let width = titleLabel?.text?.size(withAttributes: [NSAttributedString.Key.font : titleLabel!.font!]).width {
+            snp.makeConstraints{
+                $0.width.equalTo(width+18)
+            }
+        }
+    }
+    
+    private func setUI(on: Bool) {
+        layer.masksToBounds = true
+        backgroundColor = on ? UIColor.init(argb: 0xFF4383FF) : .white
+        layer.borderColor = UIColor.init(argb: 0xFFDDDDDD).cgColor
+        layer.borderWidth = 1
+        layer.cornerRadius = 4
+        titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        setTitleColor(on ? .white : UIColor.init(argb: 0xFF444444), for: .normal)
     }
     
 }

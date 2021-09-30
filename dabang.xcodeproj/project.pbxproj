@@ -31,6 +31,7 @@
 		458D922427054910000ADF61 /* RoomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 458D922327054910000ADF61 /* RoomModel.swift */; };
 		458D922627054A8E000ADF61 /* RoomListData.txt in Resources */ = {isa = PBXBuildFile; fileRef = 458D922527054A8E000ADF61 /* RoomListData.txt */; };
 		8E89C70CD85A083623216970 /* Pods_dabang.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BFDCDD2B06D9926B4AA3072 /* Pods_dabang.framework */; };
+		9C9AA3682705CB9600EFF355 /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C9AA3672705CB9600EFF355 /* UIColor+.swift */; };
 		EB3723A9BC17443341F6B826 /* Pods_dabangTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23827594524DB99A60ED0B2C /* Pods_dabangTests.framework */; };
 		F9F470D60F4467AC1BE359D9 /* Pods_dabang_dabangUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01A73DA0AB26CBE35A5A2780 /* Pods_dabang_dabangUITests.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +89,7 @@
 		458D922527054A8E000ADF61 /* RoomListData.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = RoomListData.txt; sourceTree = "<group>"; };
 		6B87AF3EB536368090C315B7 /* Pods-dabang-dabangUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dabang-dabangUITests.debug.xcconfig"; path = "Target Support Files/Pods-dabang-dabangUITests/Pods-dabang-dabangUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8989BAB7FD8300303FD9919F /* Pods-dabangTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dabangTests.debug.xcconfig"; path = "Target Support Files/Pods-dabangTests/Pods-dabangTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9C9AA3672705CB9600EFF355 /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
 		B87A61A18B8B48F4DF1BA6DB /* Pods-dabang.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dabang.release.xcconfig"; path = "Target Support Files/Pods-dabang/Pods-dabang.release.xcconfig"; sourceTree = "<group>"; };
 		C9AFF0E24066F71B909E4465 /* Pods-dabang-dabangUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dabang-dabangUITests.release.xcconfig"; path = "Target Support Files/Pods-dabang-dabangUITests/Pods-dabang-dabangUITests.release.xcconfig"; sourceTree = "<group>"; };
 		EDE4C89E751060A5F72DA6BF /* Pods-dabang.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-dabang.debug.xcconfig"; path = "Target Support Files/Pods-dabang/Pods-dabang.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				455003A8270576FC00FD2527 /* UIImage+.swift */,
 				455003AA2705770100FD2527 /* UIImageView+.swift */,
 				455003B1270594E100FD2527 /* String+.swift */,
+				9C9AA3672705CB9600EFF355 /* UIColor+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -517,6 +520,7 @@
 				455003B2270594E100FD2527 /* String+.swift in Sources */,
 				455003B027057B8F00FD2527 /* FeedbackGenerator.swift in Sources */,
 				4550039A2705564100FD2527 /* AverageCell.swift in Sources */,
+				9C9AA3682705CB9600EFF355 /* UIColor+.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,7 +700,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U2XKV67PR3;
 				INFOPLIST_FILE = dabang/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -717,7 +721,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = U2XKV67PR3;
 				INFOPLIST_FILE = dabang/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
